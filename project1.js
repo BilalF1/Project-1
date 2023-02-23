@@ -8,6 +8,8 @@ let b7 = document.querySelector('.box7');
 let b8 = document.querySelector('.box8');
 let b9 = document.querySelector('.box9');
 
+let boxes = document.querySelectorAll('.box')
+
 let restartbtn = document.querySelector('.restart').addEventListener('click', function () {
     restart()
 })
@@ -24,182 +26,54 @@ var winningCombo = [
     [3, 5, 7],
 ]
 
-function checkPlayer1() {
-    if (b1.style.backgroundColor === 'firebrick' && b2.style.backgroundColor2 === 'firebrick' && b3.style.backgroundColor === 'firebrick') {
-        player1win()
-    } else if (b4.style.backgroundColor === 'firebrick') {
-        player2win()
-    }
 
+function checkPlayerWin() {
+    for (let combo = 0; combo < winningCombo.length; combo++) {
+        //have to make sure that the winning combo arry 1 (exmple) has the same colors
+        var winningBox1 = combo[0]
+        var winningBox2 = combo[1]
+        var winningBox3 = combo[2]
+        var box1 = boxes[winningBox1]
+        var box2 = boxes[winningBox2]
+        var box3 = boxes[winningBox3]
+        console.log(winningBox1);
+        if (box1.classList.contains('x') && box2.classList.contains('x') && box3.classList.contains('x')) { 
+             document.querySelector('.game-alert').textContent = 'Player 1 Wins'
+
+        } else if (box1.classList.contains('o') && box2.classList.contains('o') && box3.classList.contains('o')) {
+            player2win()
+            document.querySelector('.game-alert').textContent = 'Player 2 Wins'
+        }
+    }
 }
 
-
-// function checkPlayer2() {
-//     if (div1 === blue && div2 === blue && div3 === blue) {
-//         player2win()
-//     }
-// }
+let turn = 'player1'
 
 function restart() {
-    document.querySelector('.player1').style.display = 'none';
-    document.querySelector('.player2').style.display = 'none';
-    b1.style.backgroundColor = 'cornsilk'
-    b2.style.backgroundColor = 'cornsilk'
-    b3.style.backgroundColor = 'cornsilk'
-    b4.style.backgroundColor = 'cornsilk'
-    b5.style.backgroundColor = 'cornsilk'
-    b6.style.backgroundColor = 'cornsilk'
-    b7.style.backgroundColor = 'cornsilk'
-    b8.style.backgroundColor = 'cornsilk'
-    b9.style.backgroundColor = 'cornsilk'
     turn = 'player1'
 }
 
-
-
-
-function player1win() {
-    document.querySelector('player1').style.display = '';
-}
-
-function player2win() {
-    document.querySelector('player2').style.display = '';
-}
-
-
-
-let turn = 'player1'
 function switchTurn() {
     if (turn === 'player1') {
         turn = 'player2'
     } else if (turn === 'player2') {
         turn = 'player1'
     }
-}
+} 
 
-document.querySelector('.player1').style.display = 'none';
-document.querySelector('.player2').style.display = 'none';
 
-let boxes = document.querySelectorAll('.box')
 function handleClick(event) {
     var boxClicked = event.target
-    if (boxClicked.style.backgroundColor == 'cornsilk') {
-        if (turn === 'player1') {
-            boxClicked.style.backgroundColor = 'firebrick'
-        } else if (turn === 'player2') {
-            boxClicked.style.backgroundColor = 'cyan'
-        }
-    } 
+    
+    if (turn === 'player1') {
+        boxClicked.classList.add('x')
+    } else if (turn === 'player2') {
+        boxClicked.classList.add('o')
+    }
     switchTurn()
-} 
+    checkPlayerWin()
+}
 boxes.forEach(box => {
-    box.addEventListener('click', handleClick)
+    box.addEventListener('click', handleClick, {once : true})
 })
 
-// b1.addEventListener('click', () => {
-//     if (b1.style.backgroundColor == 'cornsilk') {
-//         if (turn === 'player1') {
-//             b1.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b1.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b2.addEventListener('click', () => {
-//     if (b2.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b2.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b2.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b3.addEventListener('click', () => {
-//     if (b3.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b3.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b3.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b4.addEventListener('click', () => {
-//     if (b4.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b4.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b4.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b5.addEventListener('click', () => {
-//     if (b5.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b5.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b5.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b6.addEventListener('click', () => {
-//     if (b6.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b6.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b6.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b7.addEventListener('click', () => {
-//     if (b7.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b7.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b7.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b8.addEventListener('click', () => {
-//     if (b8.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b8.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b8.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })
-
-// b9.addEventListener('click', () => {
-//     if (b9.style.backgroundColor === 'cornsilk') {
-//         if (turn === 'player1') {
-//             b9.style.backgroundColor = 'firebrick'
-//         } else if (turn === 'player2') {
-//             b9.style.backgroundColor = 'cyan'
-//         }
-//     }
-//     checkPlayer1()
-//     checkPlayer2()
-// })

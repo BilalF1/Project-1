@@ -12,6 +12,9 @@ let boxes = document.querySelectorAll('.box')
 
 let restartbtn = document.querySelector('#restart')
 
+let countedBox = 0
+
+
 
 // this is an array of winnning combinations
 var winningCombo = [
@@ -36,7 +39,8 @@ function checkPlayerWin() {
         var box1 = boxes[combo[0]]
         var box2 = boxes[combo[1]]
         var box3 = boxes[combo[2]]
-        console.log(boxes);
+
+         
         if (box1.classList.contains('x') && box2.classList.contains('x') && box3.classList.contains('x')) {
             document.querySelector('.game-alert').textContent = 'Player 1 Wins'
             boxes.forEach(box => {
@@ -48,7 +52,9 @@ function checkPlayerWin() {
             boxes.forEach(box => {
                 box.removeEventListener('click', handleClick)
             })
-        } else  (document.querySelector('.game-alert').textContent = 'Draw, Play again!')
+        } else if (countedBox === 9) {
+            (document.querySelector('.game-alert').textContent = 'Draw, Play again!')
+        }
 
     }
 }
@@ -57,6 +63,7 @@ let turn = 'player1'
 
 function restart() {
     turn = 'player1'
+    countedBox = 0
     //this function clears the board, removing each box
     boxes.forEach(box => {
         box.classList.remove('x')
@@ -85,6 +92,8 @@ function handleClick(event) {
     } else if (turn === 'player2') {
         boxClicked.classList.add('o')
     }
+    countedBox++
+    console.log(countedBox);
     switchTurn()
     checkPlayerWin()
 }

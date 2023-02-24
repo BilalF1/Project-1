@@ -1,5 +1,5 @@
-https://bilalf1.github.io/Project-1/
 
+[Press Here to Play](https://bilalf1.github.io/Project-1).
 
 How to play Tic Tac Toe
 

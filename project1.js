@@ -42,23 +42,25 @@ function checkPlayerWin() {
 
          
         if (box1.classList.contains('x') && box2.classList.contains('x') && box3.classList.contains('x')) {
+            roundWon = true
             document.querySelector('.game-alert').textContent = 'Player 1 Wins'
             boxes.forEach(box => {
                 box.removeEventListener('click', handleClick)
             })
             
         } else if (box1.classList.contains('o') && box2.classList.contains('o') && box3.classList.contains('o')) {
+            roundWon = true
             document.querySelector('.game-alert').textContent = 'Player 2 Wins'
             boxes.forEach(box => {
                 box.removeEventListener('click', handleClick)
             })
-        } else if (countedBox === 9) {
+        } else if (countedBox === 9 && roundWon === false ) {
             (document.querySelector('.game-alert').textContent = 'Draw, Play again!')
         }
 
     }
 }
-
+let roundWon = false
 let turn = 'player1'
 
 function restart() {
@@ -71,6 +73,7 @@ function restart() {
         box.addEventListener('click', handleClick, { once: true })
     }) 
     document.querySelector('.game-alert').textContent = ''
+    roundWon = false
 
 }
 

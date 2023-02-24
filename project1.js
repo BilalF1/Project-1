@@ -10,39 +10,44 @@ let b9 = document.querySelector('.box9');
 
 let boxes = document.querySelectorAll('.box')
 
-let restartbtn = document.querySelector('.restart').addEventListener('click', function () {
-    restart()
-})
+let restartbtn = document.querySelector('#restart')
+
 
 // this is an array of winnning combinations
 var winningCombo = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
+//div1  2  3
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-    [3, 6, 9],
-    [1, 5, 9],
-    [3, 5, 7],
+    [0, 4, 8],
+    [2, 4, 6],
 ]
 
 
 function checkPlayerWin() {
-    for (let combo = 0; combo < winningCombo.length; combo++) {
+    for (let combo of winningCombo) {
         //have to make sure that the winning combo arry 1 (exmple) has the same colors
-        var winningBox1 = combo[0]
-        var winningBox2 = combo[1]
-        var winningBox3 = combo[2]
-        var box1 = boxes[winningBox1]
-        var box2 = boxes[winningBox2]
-        var box3 = boxes[winningBox3]
-        console.log(winningBox1);
-        if (box1.classList.contains('x') && box2.classList.contains('x') && box3.classList.contains('x')) { 
-             document.querySelector('.game-alert').textContent = 'Player 1 Wins'
-
+        // var winningBox1 = combo[0]
+        // var winningBox2 = combo[1]
+        // var winningBox3 = combo[2]
+        var box1 = boxes[combo[0]]
+        var box2 = boxes[combo[1]]
+        var box3 = boxes[combo[2]]
+        console.log(boxes);
+        if (box1.classList.contains('x') && box2.classList.contains('x') && box3.classList.contains('x')) {
+            document.querySelector('.game-alert').textContent = 'Player 1 Wins'
+            boxes.forEach(box => {
+                box.removeEventListener('click', handleClick)
+            })
+            
         } else if (box1.classList.contains('o') && box2.classList.contains('o') && box3.classList.contains('o')) {
-            player2win()
             document.querySelector('.game-alert').textContent = 'Player 2 Wins'
+            boxes.forEach(box => {
+                box.removeEventListener('click', handleClick)
+            })
         }
     }
 }
@@ -51,6 +56,10 @@ let turn = 'player1'
 
 function restart() {
     turn = 'player1'
+    boxes.forEach(box => {
+        box.classList.remove('x')
+        box.classList.remove('o')
+    })
 }
 
 function switchTurn() {
@@ -59,12 +68,12 @@ function switchTurn() {
     } else if (turn === 'player2') {
         turn = 'player1'
     }
-} 
+}
 
 
 function handleClick(event) {
     var boxClicked = event.target
-    
+
     if (turn === 'player1') {
         boxClicked.classList.add('x')
     } else if (turn === 'player2') {
@@ -74,6 +83,7 @@ function handleClick(event) {
     checkPlayerWin()
 }
 boxes.forEach(box => {
-    box.addEventListener('click', handleClick, {once : true})
+    box.addEventListener('click', handleClick, { once: true })
 })
 
+restartbtn.addEventListener('click', restart) 

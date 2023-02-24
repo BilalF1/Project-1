@@ -48,7 +48,8 @@ function checkPlayerWin() {
             boxes.forEach(box => {
                 box.removeEventListener('click', handleClick)
             })
-        }
+        } else  (document.querySelector('.game-alert').textContent = 'Draw, Play again!')
+
     }
 }
 
@@ -56,10 +57,14 @@ let turn = 'player1'
 
 function restart() {
     turn = 'player1'
+    //this function clears the board, removing each box
     boxes.forEach(box => {
         box.classList.remove('x')
         box.classList.remove('o')
-    })
+        box.addEventListener('click', handleClick, { once: true })
+    }) 
+    document.querySelector('.game-alert').textContent = ''
+
 }
 
 function switchTurn() {
@@ -73,7 +78,8 @@ function switchTurn() {
 
 function handleClick(event) {
     var boxClicked = event.target
-
+//switches turns everytime a div is clicked untill theres a winning combo,
+//allows for only one click per div
     if (turn === 'player1') {
         boxClicked.classList.add('x')
     } else if (turn === 'player2') {

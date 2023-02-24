@@ -7,16 +7,15 @@ h1{
 body{
     background-image: url(./img/471368.jpeg);
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-color: bisque;
+    background-position-x: center;
+    background-size: cover;
 }
 
 .gameBoard{ 
     
     border: 5px solid black;
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -48,7 +47,12 @@ body{
     color: firebrick;
     font-size: larger;
     font-family: 'Mouse Memoirs', sans-serif;
-    margin: 100px;
     
+    
+}
+ 
 
-} 
+button{
+    margin: 0 auto;
+    
+}

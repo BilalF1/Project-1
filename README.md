@@ -18,3 +18,14 @@ Technologies Used
 * CSS
 * HTML
 
+
+Difficulties
+* getting the restart button to function correctly 
+* making sure the draw would be displayed correctly
+
+
+Future Additions
+* add a scoreboard
+* fix up the background image
+* placing certain features in the right places
+* adding animations in the background
